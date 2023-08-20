@@ -1,0 +1,10 @@
+apiVersion: golem.spot-os.io/v1alpha1
+kind: EvacuationPlan
+metadata:
+  name: spotos-workload-shuffle
+  namespace: golem
+spec:
+  SequentialJuggle:
+    - spotos-workload-a: worker-2
+    - spotos-workload-c: worker-1
+    - spotos-workload-b: worker-3
