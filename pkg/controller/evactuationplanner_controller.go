@@ -19,7 +19,8 @@ package controllers
 import (
 	"context"
 	"fmt"
-	"github.com/Technion-SpotOS/SpotWorkload/pkg/api/v1alpha1"
+	v1alpha1 "github.com/Technion-SpotOS/EvacuationPlanner/pkg/api/v1alpha1"
+	"github.com/go-logr/logr"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -27,8 +28,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 )
 
+const loggerName = "evacuation-planner-controller"
+
 // EvacuationPlannerReconciler reconciles a SpotInstance object.
 type EvacuationPlannerReconciler struct {
+	log logr.Logger
 	client.Client
 	Scheme *runtime.Scheme
 }
@@ -44,8 +48,8 @@ func (r *EvacuationPlannerReconciler) Reconcile(ctx context.Context, req ctrl.Re
 // setupEvacuationPlannerController sets up the controller with the Manager.
 func setupEvacuationPlannerController(mgr ctrl.Manager) error {
 	if err := ctrl.NewControllerManagedBy(mgr).
-		For(&v1alpha1.SpotWorkload{}).
-		Complete(&EvacuationPlannerReconciler{mgr.GetClient(), mgr.GetScheme()}); err != nil {
+		For(&v1alpha1.EvacuationPlan{}).
+		Complete(&EvacuationPlannerReconciler{ctrl.Log.WithName(loggerName), mgr.GetClient(), mgr.GetScheme()}); err != nil {
 		return fmt.Errorf("failed to add spot-instance controller to the manager: %w", err)
 	}
 
