@@ -29,7 +29,7 @@ type EvacuationPlanSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// SequentialJuggle is a map of workload-name -> instance-name to be evacuated sequentially in appearing order.
-	SequentialJuggle string `json:"region,omitempty"`
+	SequentialJuggleMap map[string]string `json:"sequential-juggle-map,omitempty"`
 }
 
 // EvacuationPlanPhase represents the phase of the evacuation plan.
