@@ -32,13 +32,25 @@ type EvacuationPlanSpec struct {
 	SequentialJuggle string `json:"region,omitempty"`
 }
 
+// EvacuationPlanPhase represents the phase of the evacuation plan.
+type EvacuationPlanPhase string
+
+const (
+	// EvacuationPlanPhasePending is the phase when the plan is created and not yet processed.
+	EvacuationPlanPhasePending EvacuationPlanPhase = "Pending"
+	// EvacuationPlanPhaseInProgress is the phase when the plan is being processed.
+	EvacuationPlanPhaseInProgress EvacuationPlanPhase = "InProgress"
+	// EvacuationPlanPhaseCompleted is the phase when the plan is completed.
+	EvacuationPlanPhaseCompleted EvacuationPlanPhase = "Completed"
+)
+
 // EvacuationPlanStatus defines the observed state of EvacuationPlan.
 type EvacuationPlanStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Phase is the current phase of the evacuation plan.
-	Phase string `json:"phase,omitempty" enum:"pending|executing|complete"`
+	Phase EvacuationPlanPhase `json:"phase,omitempty"`
 }
 
 //+kubebuilder:object:root=true
