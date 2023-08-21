@@ -28,7 +28,7 @@ type EvacuationPlanSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// SequentialJuggle is a map of workload-name -> instance-name to be evacuated sequentially in appearing order.
+	// SequentialJuggle is a map of workload (namespaced name) -> instance-name to be evacuated sequentially in appearing order.
 	SequentialJuggleMap map[string]string `json:"sequential-juggle-map,omitempty"`
 }
 
